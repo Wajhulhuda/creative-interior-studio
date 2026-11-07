@@ -1,0 +1,90 @@
+@if (state() === 'success') {
+  <div class="lead-form__success">
+    <mat-icon>check_circle</mat-icon>
+    <h3>Thank you!</h3>
+    <p>
+      Your details have been sent to {{ site.founder }}. We'll get back to you shortly — or chat
+      with us right now on WhatsApp.
+    </p>
+    <a [href]="whatsappHref" target="_blank" rel="noopener" mat-flat-button class="btn-gold">
+      <mat-icon>chat</mat-icon>
+      Chat on WhatsApp
+    </a>
+  </div>
+} @else {
+  <form class="lead-form" [formGroup]="form" (ngSubmit)="onSubmit()">
+    <mat-form-field appearance="outline" subscriptSizing="dynamic" class="lead-form__field">
+      <mat-label>Name</mat-label>
+      <input matInput formControlName="name" autocomplete="name" placeholder="Your full name" />
+      @if (form.controls.name.touched && form.controls.name.invalid) {
+        <mat-error>Please enter your name</mat-error>
+      }
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" subscriptSizing="dynamic" class="lead-form__field">
+      <mat-label>Email</mat-label>
+      <input matInput type="email" formControlName="email" autocomplete="email" placeholder="you@example.com" />
+      @if (form.controls.email.touched && form.controls.email.invalid) {
+        <mat-error>Please enter a valid email</mat-error>
+      }
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" subscriptSizing="dynamic" class="lead-form__field">
+      <mat-label>Phone Number</mat-label>
+      <span matTextPrefix>+91&nbsp;</span>
+      <input
+        matInput
+        type="tel"
+        inputmode="numeric"
+        maxlength="10"
+        formControlName="phone"
+        autocomplete="tel-national"
+        placeholder="98765 43210"
+      />
+      @if (form.controls.phone.touched && form.controls.phone.invalid) {
+        <mat-error>Enter a valid 10-digit mobile number</mat-error>
+      }
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" subscriptSizing="dynamic" class="lead-form__field">
+      <mat-label>City / Area</mat-label>
+      <mat-select formControlName="city">
+        @for (city of cityOptions; track city) {
+          <mat-option [value]="city">{{ city }}</mat-option>
+        }
+      </mat-select>
+      @if (form.controls.city.touched && form.controls.city.invalid) {
+        <mat-error>Please select your city or area</mat-error>
+      }
+    </mat-form-field>
+
+    <mat-checkbox formControlName="whatsappOptIn" class="lead-form__checkbox">
+      Send me updates on WhatsApp
+    </mat-checkbox>
+
+    @if (state() === 'error') {
+      <div class="lead-form__error">
+        <mat-icon>error_outline</mat-icon>
+        <span>
+          Something went wrong sending this. Please try again, or
+          <a [href]="whatsappHref" target="_blank" rel="noopener">message us on WhatsApp</a>
+          directly.
+        </span>
+      </div>
+    }
+
+    <button type="submit" mat-flat-button class="btn-gold lead-form__submit" [disabled]="state() === 'submitting'">
+      @if (state() === 'submitting') {
+        <mat-progress-spinner diameter="20" mode="indeterminate"></mat-progress-spinner>
+        <span>Sending...</span>
+      } @else {
+        <span>Get Free Consultation</span>
+      }
+    </button>
+
+    <p class="lead-form__consent">
+      By submitting, you agree to be contacted by {{ site.companyName }} via call or WhatsApp
+      regarding your enquiry.
+    </p>
+  </form>
+}

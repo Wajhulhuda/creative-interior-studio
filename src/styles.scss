@@ -1,0 +1,392 @@
+@use 'styles/theme' as *;
+
+:root {
+  --gold: #c9a227;
+  --gold-light: #e3c878;
+  --gold-dark: #826512;
+  --charcoal: #1a1816;
+  --charcoal-soft: #2f2a27;
+  --cream: #faf8f3;
+  --cream-deep: #f2ede1;
+  --ink: #241f1a;
+  --ink-soft: #5c554d;
+  --border-soft: #e7e0d1;
+  --radius-md: 10px;
+  --radius-lg: 18px;
+  --shadow-soft: 0 10px 30px rgba(26, 24, 22, 0.08);
+  --shadow-strong: 0 20px 48px rgba(26, 24, 22, 0.18);
+  --max-width: 1360px;
+  --font-display: 'Poppins', 'Helvetica Neue', Arial, sans-serif;
+  --font-body: 'Poppins', 'Helvetica Neue', Arial, sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+.reveal {
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity 0.7s cubic-bezier(0.2, 0.7, 0.2, 1), transform 0.7s cubic-bezier(0.2, 0.7, 0.2, 1);
+  will-change: opacity, transform;
+}
+
+.reveal--visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal {
+    transition: none;
+  }
+}
+
+html, body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-body);
+  background: var(--cream);
+  color: var(--ink);
+  -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3, h4 {
+  font-family: var(--font-display);
+  font-weight: 700;
+  color: var(--charcoal);
+  margin: 0 0 0.5em;
+  line-height: 1.25;
+  letter-spacing: -0.01em;
+}
+
+p {
+  line-height: 1.7;
+  color: var(--ink-soft);
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+.mat-icon {
+  font-family: 'Material Symbols Outlined' !important;
+  font-weight: normal;
+  font-style: normal;
+  font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+
+  // Material's default line-height-based centering is tuned for the classic
+  // "Material Icons" font. Material Symbols has different glyph metrics, so
+  // icons render visibly off-center inside their box unless we flex-center
+  // the glyph ourselves instead of relying on line-height.
+  &.mat-ligature-font {
+    display: inline-flex !important;
+    align-items: center;
+    justify-content: center;
+    line-height: 1 !important;
+  }
+}
+
+// Icon + text pairs inside Material buttons: the icon and the MDC label span
+// are separate flex siblings, so give them consistent vertical centering and
+// spacing regardless of which button variant is used.
+.mat-mdc-button-base {
+  .mat-icon {
+    margin-right: 0;
+  }
+
+  .mdc-button__label {
+    display: inline-flex;
+    align-items: center;
+  }
+}
+
+.page-container {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 0 24px;
+
+  @media (min-width: 600px) {
+    padding: 0 32px;
+  }
+
+  @media (min-width: 1280px) {
+    padding: 0 48px;
+  }
+}
+
+.section {
+  padding: 64px 0;
+
+  @media (min-width: 960px) {
+    padding: 96px 0;
+  }
+}
+
+.section-dark {
+  background: var(--charcoal);
+  color: #f3efe6;
+
+  h1, h2, h3, h4 {
+    color: #f3efe6;
+  }
+
+  p {
+    color: #c9c2b6;
+  }
+}
+
+.eyebrow {
+  display: inline-block;
+  font-family: var(--font-body);
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  font-size: 0.8rem;
+  color: var(--gold-dark);
+  margin-bottom: 12px;
+}
+
+.section-dark .eyebrow {
+  color: var(--gold-light);
+}
+
+.btn-gold {
+  // !important on both: Material's own `.mat-unthemed` button class has
+  // higher selector specificity (2 classes) than this single class, so a
+  // plain override here silently loses to Material's default white/black
+  // button background+text regardless of source order.
+  background: linear-gradient(135deg, var(--gold-light), var(--gold)) !important;
+  color: var(--charcoal) !important;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+}
+
+.btn-outline-light {
+  border: 1.5px solid rgba(255, 255, 255, 0.5) !important;
+  color: #fff !important;
+}
+
+::selection {
+  background: var(--gold-light);
+  color: var(--charcoal);
+}
+
+// Gallery lightbox on mobile: fill the viewport edge-to-edge instead of a
+// centered card. Targets the CDK overlay pane + Material's dialog surface,
+// which live outside component style encapsulation (appended to <body>).
+.cdk-overlay-pane.gallery-lightbox-panel-fullscreen {
+  margin: 0 !important;
+  max-width: 100vw !important;
+  max-height: 100dvh !important;
+}
+
+.gallery-lightbox-panel-fullscreen .mat-mdc-dialog-container,
+.gallery-lightbox-panel-fullscreen .mdc-dialog__surface {
+  border-radius: 0 !important;
+  padding: 0 !important;
+  width: 100vw !important;
+  height: 100dvh !important;
+  max-width: 100vw !important;
+  max-height: 100dvh !important;
+}
+
+.lead-popup-panel .mat-mdc-dialog-container,
+.lead-popup-panel .mdc-dialog__surface {
+  border-radius: var(--radius-lg) !important;
+  padding: 0 !important;
+  // Single scroll container for the whole dialog (image + form scroll
+  // together) — a fallback for short viewports only; normal-height screens
+  // shouldn't need it at all now that the form itself is more compact.
+  // hidden on the x-axis keeps the rounded corners clipped properly.
+  overflow: hidden auto !important;
+}
+
+// Mobile lead form, presented as a bottom sheet (slides up from the bottom
+// via MatBottomSheet's own built-in animation) instead of a centered dialog.
+// Set directly with !important rather than via the --mat-bottom-sheet-* theme
+// tokens — those resolve fine (confirmed via computed style) but something
+// else in Material's own CSS still wins on the actual border-radius/background
+// properties, same class of issue seen elsewhere with MDC component overrides.
+.lead-sheet-panel .mat-bottom-sheet-container {
+  border-radius: var(--radius-lg) var(--radius-lg) 0 0 !important;
+  background: var(--cream) !important;
+  padding: 0 !important;
+  max-width: 100vw !important;
+  width: 100vw;
+}
+
+.section-heading {
+  text-align: center;
+  max-width: 640px;
+  margin: 0 auto 40px;
+
+  h2 {
+    font-size: clamp(1.7rem, 3.2vw, 2.4rem);
+  }
+}
+
+.section-cta {
+  display: flex;
+  justify-content: center;
+  margin-top: 40px;
+
+  a {
+    border-radius: 28px !important;
+    padding: 0 26px !important;
+    height: 48px;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+  }
+}
+
+.service-card {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  background: #fff;
+  border: 1px solid var(--border-soft);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  cursor: pointer;
+  font-family: inherit;
+  text-align: left;
+  padding: 0;
+  transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+
+  &:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-soft);
+    border-color: var(--gold-light);
+  }
+}
+
+.service-card__media {
+  // Deliberately NOT overflow:hidden here — the icon badge below overlaps
+  // this element's bottom edge on purpose, and needs to stay unclipped.
+  // Only the image crop (for the hover zoom) gets its own clipped wrapper.
+  position: relative;
+  flex-shrink: 0;
+}
+
+.service-card__media-crop {
+  aspect-ratio: 4 / 3;
+  overflow: hidden;
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.4s ease;
+  }
+}
+
+.service-card:hover .service-card__media-crop img {
+  transform: scale(1.06);
+}
+
+.service-card__icon {
+  position: absolute;
+  left: 14px;
+  bottom: -18px;
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  background: #fff;
+  border: 1px solid var(--border-soft);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: var(--shadow-soft);
+  z-index: 1;
+
+  mat-icon {
+    font-size: 20px;
+    height: 20px;
+    width: 20px;
+    color: var(--gold-dark);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+}
+
+.service-card__body {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  padding: 28px 20px 20px;
+}
+
+.service-card h3 {
+  font-size: 1.05rem;
+  margin-bottom: 8px;
+}
+
+.service-card p {
+  font-size: 0.9rem;
+  margin: 0;
+  flex: 1;
+}
+
+.service-card__arrow {
+  align-self: flex-end;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  border: 1px solid var(--border-soft);
+  color: var(--gold-dark);
+  margin-top: 16px;
+  transition: background 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
+
+  mat-icon {
+    font-size: 18px;
+    height: 18px;
+    width: 18px;
+  }
+}
+
+.service-card:hover .service-card__arrow {
+  background: var(--gold);
+  border-color: var(--gold);
+  color: var(--charcoal);
+  transform: translateX(2px);
+}
+
+.trust-card {
+  background: var(--cream-deep);
+  border-radius: var(--radius-lg);
+  padding: 28px 24px;
+  text-align: left;
+
+  mat-icon {
+    font-size: 32px;
+    height: 32px;
+    width: 32px;
+    color: var(--gold-dark);
+    margin-bottom: 14px;
+  }
+
+  h3 {
+    font-size: 1.05rem;
+    margin-bottom: 8px;
+  }
+
+  p {
+    font-size: 0.9rem;
+    margin: 0;
+  }
+}

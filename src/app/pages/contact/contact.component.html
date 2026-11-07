@@ -1,0 +1,94 @@
+<app-page-header
+  eyebrow="Get In Touch"
+  title="Let's Design Your Dream Home"
+  subtitle="Reach out on WhatsApp or call directly — {{ site.founder }} personally responds to every enquiry."
+  backgroundImage="assets/images/foyer/foyer-entrance-01.webp"
+></app-page-header>
+
+<section class="section contact-section">
+  <div class="page-container contact-grid">
+    <div class="contact-form-card" appReveal>
+      <h2>Get a Free Consultation</h2>
+      <p class="contact-form-card__sub">
+        Share your details and {{ site.founder }} will personally get back to you.
+      </p>
+      <app-lead-form></app-lead-form>
+    </div>
+
+    <div class="contact-aside" appReveal [appRevealDelay]="120">
+      <div class="contact-card">
+        <h2>Contact Details</h2>
+
+        <div class="contact-card__row">
+          <mat-icon>person</mat-icon>
+          <div>
+            <span class="contact-card__label">Founder</span>
+            <span class="contact-card__value">{{ site.founder }}</span>
+          </div>
+        </div>
+
+        <div class="contact-card__row">
+          <mat-icon>location_on</mat-icon>
+          <div>
+            <span class="contact-card__label">Studio Location</span>
+            <span class="contact-card__value">{{ site.address }}</span>
+          </div>
+        </div>
+
+        @for (phone of site.phones; track phone.raw) {
+          <div class="contact-card__row">
+            <mat-icon>call</mat-icon>
+            <div>
+              <span class="contact-card__label">Phone</span>
+              <a class="contact-card__value" [href]="telLink(phone.raw)">{{ phone.display }}</a>
+            </div>
+          </div>
+        }
+
+        <div class="contact-card__row">
+          <mat-icon>photo_camera</mat-icon>
+          <div>
+            <span class="contact-card__label">Instagram</span>
+            <a class="contact-card__value" [href]="site.instagramUrl" target="_blank" rel="noopener">
+              {{ site.instagramHandle }}
+            </a>
+          </div>
+        </div>
+
+        <div class="contact-card__badge">
+          <mat-icon>verified_user</mat-icon>
+          <span>Free site visit, 3D design consultation &amp; workmanship warranty on every project.</span>
+        </div>
+
+        <div class="contact-card__actions">
+          <a [href]="whatsappLink(site.phones[0].raw)" target="_blank" rel="noopener" mat-flat-button class="btn-gold">
+            <mat-icon>chat</mat-icon>
+            Chat on WhatsApp
+          </a>
+          <a [href]="telLink(site.phones[0].raw)" mat-stroked-button>
+            <mat-icon>call</mat-icon>
+            Call Now
+          </a>
+        </div>
+
+        <div class="contact-card__areas">
+          <span class="contact-card__label">Service Areas</span>
+          <div class="contact-card__area-list">
+            @for (area of site.serviceAreas; track area) {
+              <span>{{ area }}</span>
+            }
+          </div>
+        </div>
+      </div>
+
+      <div class="contact-map">
+        <iframe
+          [src]="mapsUrl"
+          title="Creative Interior Design Studio location — Patancheru, Hyderabad"
+          loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade"
+        ></iframe>
+      </div>
+    </div>
+  </div>
+</section>

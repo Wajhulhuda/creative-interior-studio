@@ -1,0 +1,201 @@
+:host {
+  // Angular component hosts default to `display: inline`, which can corrupt
+  // the containing-block chain for a sticky/absolutely-positioned child.
+  display: block;
+}
+
+:host(.header--hidden) {
+  // Hidden while any dialog/overlay is open. The CDK backdrop already blocks
+  // interaction (it's above the header's z-index), but it's semi-transparent
+  // and dark like the header itself, so visually the header still reads as
+  // "on top" of the dialog unless we hide it outright.
+  display: none;
+}
+
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  background: var(--charcoal);
+  border-bottom: 1px solid rgba(201, 162, 39, 0.25);
+}
+
+.header__inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  height: 76px;
+}
+
+.header__brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-shrink: 0;
+}
+
+.header__logo {
+  height: 40px;
+  width: auto;
+  object-fit: contain;
+
+  @media (max-width: 380px) {
+    height: 34px;
+  }
+}
+
+.header__brand-text {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.18;
+}
+
+.header__brand-name {
+  font-weight: 700;
+  font-size: 1.05rem;
+  color: #f3efe6;
+  letter-spacing: 0.01em;
+  white-space: nowrap;
+
+  @media (max-width: 380px) {
+    font-size: 0.88rem;
+  }
+}
+
+.header__brand-sub {
+  font-size: 0.66rem;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--gold-light);
+  white-space: nowrap;
+
+  @media (max-width: 380px) {
+    font-size: 0.58rem;
+  }
+}
+
+.header__nav {
+  display: none;
+  align-items: center;
+  gap: 32px;
+
+  @media (min-width: 960px) {
+    display: flex;
+  }
+}
+
+.header__nav-link {
+  position: relative;
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: #e6e1d6;
+  padding: 8px 0;
+
+  &::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 100%;
+    bottom: 0;
+    height: 2px;
+    background: var(--gold);
+    transition: right 0.25s ease;
+  }
+
+  &:hover,
+  &.is-active {
+    color: #ffffff;
+  }
+
+  &:hover::after,
+  &.is-active::after {
+    right: 0;
+  }
+}
+
+.header__actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-shrink: 0;
+}
+
+.header__icon-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  border: 1.5px solid rgba(255, 255, 255, 0.25);
+  color: #f3efe6;
+  flex-shrink: 0;
+
+  &:hover {
+    border-color: var(--gold);
+    color: var(--gold-light);
+  }
+}
+
+// WhatsApp icon + "Free Quote" link are mobile-redundant: the hamburger
+// drawer already offers a "WhatsApp Us" button and (below) a "Get Free
+// Consultation" button, so showing them in the header too just crowds it.
+.header__whatsapp-icon,
+.header__cta {
+  @media (max-width: 959px) {
+    display: none;
+  }
+}
+
+.header__cta {
+  background: none;
+  border: none;
+  padding: 0;
+  flex-shrink: 0;
+  white-space: nowrap;
+  cursor: pointer;
+  font-family: inherit;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--gold-light);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  text-decoration-color: transparent;
+  transition: text-decoration-color 0.2s ease, color 0.2s ease;
+
+  &:hover {
+    color: var(--gold);
+    text-decoration-color: var(--gold);
+  }
+}
+
+.header__menu-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  border: none;
+  background: transparent;
+  color: #f3efe6;
+  cursor: pointer;
+
+  mat-icon {
+    font-size: 30px;
+    height: 30px;
+    width: 30px;
+  }
+
+  @media (min-width: 960px) {
+    display: none;
+  }
+
+  &:hover {
+    background: rgba(255, 255, 255, 0.08);
+  }
+}

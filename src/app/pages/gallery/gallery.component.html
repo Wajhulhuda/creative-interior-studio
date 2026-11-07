@@ -1,0 +1,55 @@
+<app-page-header
+  eyebrow="Our Work"
+  title="Portfolio & Gallery"
+  subtitle="A curated look at kitchens, wardrobes, pooja units, TV walls and more — real homes we've designed and finished."
+  [showCta]="true"
+  backgroundImage="assets/images/living/tv-unit-05.webp"
+></app-page-header>
+
+<section class="section gallery-page">
+  <div class="page-container">
+    <div class="gallery-page__filters">
+      <button
+        type="button"
+        class="filter-chip"
+        [class.is-active]="activeFilter() === 'all'"
+        (click)="setFilter('all')"
+      >
+        All
+      </button>
+      @for (category of categories; track category.id) {
+        <button
+          type="button"
+          class="filter-chip"
+          [class.is-active]="activeFilter() === category.id"
+          (click)="setFilter(category.id)"
+        >
+          {{ category.label }}
+        </button>
+      }
+    </div>
+
+    <div class="gallery-page__grid">
+      @for (image of filteredImages(); track image.id; let i = $index) {
+        <button
+          type="button"
+          class="gallery-page__item"
+          appReveal
+          [appRevealDelay]="(i % 4) * 60"
+          (click)="openLightbox(i)"
+        >
+          <img [src]="image.thumb" [alt]="image.alt" loading="lazy" />
+          <span class="gallery-page__caption">
+            {{ image.title }}
+            <mat-icon>zoom_in</mat-icon>
+          </span>
+        </button>
+      }
+    </div>
+  </div>
+</section>
+
+<app-cta-band
+  heading="Like what you see?"
+  subtext="Let's design something just as beautiful for your home."
+></app-cta-band>

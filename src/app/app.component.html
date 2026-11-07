@@ -1,0 +1,47 @@
+<app-header
+  (menuToggle)="sidenav.toggle()"
+  (openLeadForm)="openLeadDialog()"
+  [class.header--hidden]="hasOpenOverlay"
+></app-header>
+
+<mat-sidenav-container class="app-shell" [class.app-shell--drawer-open]="sidenav.opened">
+  <mat-sidenav #sidenav mode="over" position="end" class="mobile-nav">
+    <div class="mobile-nav__header">
+      <img src="assets/images/logo/logo-full.webp" alt="Creative Interior Design Studio logo" class="mobile-nav__logo" />
+      <button type="button" class="mobile-nav__close" aria-label="Close menu" (click)="sidenav.close()">
+        <mat-icon>close</mat-icon>
+      </button>
+    </div>
+
+    <nav class="mobile-nav__list">
+      @for (link of navLinks; track link.path) {
+        <a [routerLink]="link.path" routerLinkActive="is-active" [routerLinkActiveOptions]="{ exact: link.path === '/' }" (click)="sidenav.close()">
+          {{ link.label }}
+        </a>
+      }
+    </nav>
+
+    <div class="mobile-nav__cta">
+      <button type="button" mat-flat-button class="btn-gold" (click)="sidenav.close(); openLeadDialog()">
+        <mat-icon>design_services</mat-icon>
+        Get Free Consultation
+      </button>
+      <a [href]="whatsappHref" target="_blank" rel="noopener" mat-stroked-button class="mobile-nav__outline">
+        <mat-icon>chat</mat-icon>
+        WhatsApp Us
+      </a>
+      <a [href]="callHref" mat-stroked-button class="mobile-nav__outline">
+        <mat-icon>call</mat-icon>
+        Call {{ phone.display }}
+      </a>
+    </div>
+  </mat-sidenav>
+
+  <mat-sidenav-content>
+    <main>
+      <router-outlet></router-outlet>
+    </main>
+    <app-footer></app-footer>
+    <app-whatsapp-fab></app-whatsapp-fab>
+  </mat-sidenav-content>
+</mat-sidenav-container>

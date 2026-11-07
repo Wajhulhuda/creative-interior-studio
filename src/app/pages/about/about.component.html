@@ -1,0 +1,99 @@
+<app-page-header
+  eyebrow="About Us"
+  title="A Studio Built On Experience, Craft & Trust"
+  subtitle="Get to know the founder and the process behind every Creative Interior Design Studio home."
+  [showCta]="true"
+  backgroundImage="assets/images/foyer/foyer-entrance-04.webp"
+></app-page-header>
+
+<section class="section founder">
+  <div class="page-container founder__grid">
+    <div class="founder__avatar-col" appReveal>
+      <div class="founder__avatar">
+        <img src="assets/images/founder/najeeb-ahmad.webp" alt="{{ site.founder }}, Founder of {{ site.companyName }}" />
+      </div>
+    </div>
+
+    <div class="founder__copy" appReveal [appRevealDelay]="120">
+      <span class="eyebrow">The Founder</span>
+      <h2>{{ site.founder }}</h2>
+      <p class="founder__role">Founder &amp; Principal Designer, {{ site.companyName }}</p>
+      <p>
+        With {{ site.yearsExperience }}+ years immersed in Hyderabad's interior and turnkey
+        construction trade, {{ site.founder }} has built {{ site.companyName }} on a simple
+        principle: visit every site personally, design honestly, and finish what you start.
+      </p>
+      <p>
+        That hands-on approach has taken the studio from single-room makeovers to full turnkey
+        homes — {{ site.projectsCompleted }}+ projects delivered across
+        {{ site.serviceAreas.length }} areas of Hyderabad, each one backed by an in-house team
+        rather than a revolving door of subcontractors.
+      </p>
+      <p>
+        Today, {{ site.founder }} continues to personally oversee site visits and final finishing
+        on every project the studio takes on — the same standard the business was built on from
+        day one.
+      </p>
+    </div>
+  </div>
+</section>
+
+<section class="section-dark section promise">
+  <div class="page-container">
+    <div class="section-heading" appReveal>
+      <span class="eyebrow">Our Promise</span>
+      <h2>What Sets Our Experience Apart</h2>
+    </div>
+    <div class="promise__grid">
+      @for (point of promisePoints; track point.title; let i = $index) {
+        <div class="promise__card" appReveal [appRevealDelay]="i * 60">
+          <mat-icon>{{ point.icon }}</mat-icon>
+          <h3>{{ point.title }}</h3>
+          <p>{{ point.description }}</p>
+        </div>
+      }
+    </div>
+  </div>
+</section>
+
+<section class="section process">
+  <div class="page-container">
+    <div class="section-heading" appReveal>
+      <span class="eyebrow">How We Work</span>
+      <h2>From First Call To Final Handover</h2>
+      <p>A clear, proven process — refined over {{ site.yearsExperience }}+ years of projects.</p>
+    </div>
+
+    <div class="process__timeline">
+      @for (step of processSteps; track step.title; let i = $index) {
+        <div class="process__step" appReveal [appRevealDelay]="i * 60">
+          <div class="process__step-number">{{ step.step }}</div>
+          <mat-icon>{{ step.icon }}</mat-icon>
+          <h3>{{ step.title }}</h3>
+          <p>{{ step.description }}</p>
+        </div>
+      }
+    </div>
+  </div>
+</section>
+
+<section class="section-dark section stats-areas">
+  <div class="page-container">
+    <app-stat-row [stats]="stats" appReveal></app-stat-row>
+
+    <div class="section-heading stats-areas__heading" appReveal>
+      <span class="eyebrow">Service Areas</span>
+      <h2>Where We Work</h2>
+    </div>
+    <mat-chip-set class="stats-areas__chips">
+      @for (area of serviceAreas; track area) {
+        <mat-chip disableRipple>{{ area }}</mat-chip>
+      }
+    </mat-chip-set>
+  </div>
+</section>
+
+<app-cta-band
+  heading="Let's bring your experience-led design to life"
+  subtext="Talk to Najeeb directly — free site visit and 3D design consultation included."
+></app-cta-band>

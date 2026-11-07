@@ -1,0 +1,167 @@
+<section class="hero">
+  <div class="hero__media">
+    <img src="assets/images/living/tv-unit-01.webp" alt="Premium marble TV feature wall designed by Creative Interior Design Studio" />
+    <div class="hero__overlay"></div>
+  </div>
+
+  <div class="page-container hero__content">
+    <span class="eyebrow">Interior Designers in Patancheru, Hyderabad</span>
+    <h1>{{ site.tagline }}</h1>
+    <p class="hero__sub">
+      {{ site.subTagline }} — led by {{ site.founder }}, with {{ site.yearsExperience }}+ years of
+      hands-on design and execution experience across Hyderabad.
+    </p>
+
+    <div class="hero__actions">
+      <button type="button" mat-flat-button class="btn-gold" (click)="leadDialog.open()">
+        <mat-icon>design_services</mat-icon>
+        Get Free Consultation
+      </button>
+      <a [href]="whatsappHref" target="_blank" rel="noopener" mat-stroked-button class="btn-outline-light">
+        <mat-icon>chat</mat-icon>
+        WhatsApp Us
+      </a>
+    </div>
+
+    <app-stat-row [stats]="heroStats" class="hero__stats"></app-stat-row>
+  </div>
+</section>
+
+<section class="section intro">
+  <div class="page-container intro__grid">
+    <div class="intro__image" appReveal>
+      <img src="assets/images/kitchen/modular-kitchen-02.webp" alt="Modular kitchen designed and executed by Creative Interior Design Studio" />
+    </div>
+    <div class="intro__copy" appReveal [appRevealDelay]="120">
+      <span class="eyebrow">About the Studio</span>
+      <h2>A design studio built on {{ site.yearsExperience }}+ years of hands-on craft</h2>
+      <p>
+        {{ site.companyName }} is a Hyderabad-based interior design and turnkey execution studio
+        founded by {{ site.founder }}. We go beyond design drawings — our founder personally visits
+        every client's site, and our in-house team of carpenters, electricians and painters carries
+        the project through to full finishing work.
+      </p>
+      <p>
+        Over {{ site.yearsExperience }}+ years, we've delivered {{ site.projectsCompleted }}+ homes
+        across {{ site.serviceAreas.length }} areas of Hyderabad — modular kitchens, wardrobes,
+        pooja units, false ceilings and complete turnkey interiors.
+      </p>
+      <a routerLink="/about" mat-stroked-button class="intro__link">
+        More About Us
+        <mat-icon>arrow_forward</mat-icon>
+      </a>
+    </div>
+  </div>
+</section>
+
+<section class="section services-preview">
+  <div class="page-container">
+    <div class="section-heading" appReveal>
+      <span class="eyebrow">What We Do</span>
+      <h2>Complete Interior &amp; Turnkey Services</h2>
+      <p>From design to final finishing — every trade handled under one accountable roof.</p>
+    </div>
+
+    <div class="services-preview__grid">
+      @for (service of featuredServices; track service.name; let i = $index) {
+        <button
+          type="button"
+          class="service-card"
+          appReveal
+          [appRevealDelay]="i * 60"
+          (click)="leadDialog.open()"
+        >
+          <div class="service-card__media">
+            <div class="service-card__media-crop">
+              <img [src]="service.image" [alt]="service.name" loading="lazy" />
+            </div>
+            <span class="service-card__icon">
+              <mat-icon>{{ service.icon }}</mat-icon>
+            </span>
+          </div>
+          <div class="service-card__body">
+            <h3>{{ service.name }}</h3>
+            <p>{{ service.description }}</p>
+            <span class="service-card__arrow">
+              <mat-icon>arrow_forward</mat-icon>
+            </span>
+          </div>
+        </button>
+      }
+    </div>
+
+    <div class="section-cta">
+      <a routerLink="/services" mat-flat-button class="btn-gold">
+        View All Services
+        <mat-icon>arrow_forward</mat-icon>
+      </a>
+    </div>
+  </div>
+</section>
+
+<section class="section gallery-preview section-dark">
+  <div class="page-container">
+    <div class="section-heading" appReveal>
+      <span class="eyebrow">Our Work</span>
+      <h2>A Glimpse Into Our Portfolio</h2>
+      <p>{{ site.projectsCompleted }}+ homes delivered — here's a sample of our finished work.</p>
+    </div>
+
+    <div class="gallery-preview__grid">
+      @for (image of featuredGallery; track image.id; let i = $index) {
+        <a
+          class="gallery-preview__item"
+          appReveal
+          [appRevealDelay]="i * 50"
+          routerLink="/gallery"
+          [queryParams]="{ category: image.category }"
+        >
+          <img [src]="image.thumb" [alt]="image.alt" loading="lazy" />
+          <span>{{ image.title }}</span>
+        </a>
+      }
+    </div>
+
+    <div class="section-cta">
+      <a routerLink="/gallery" mat-stroked-button class="btn-outline-light">
+        View Full Portfolio
+        <mat-icon>arrow_forward</mat-icon>
+      </a>
+    </div>
+  </div>
+</section>
+
+<section class="section why-us">
+  <div class="page-container">
+    <div class="section-heading" appReveal>
+      <span class="eyebrow">Why Choose Us</span>
+      <h2>Experience You Can See In Every Detail</h2>
+    </div>
+
+    <div class="why-us__grid">
+      @for (point of trustPoints; track point.title; let i = $index) {
+        <div class="trust-card" appReveal [appRevealDelay]="i * 60">
+          <mat-icon>{{ point.icon }}</mat-icon>
+          <h3>{{ point.title }}</h3>
+          <p>{{ point.description }}</p>
+        </div>
+      }
+    </div>
+  </div>
+</section>
+
+<section class="section areas">
+  <div class="page-container areas__inner" appReveal>
+    <div class="section-heading">
+      <span class="eyebrow">Service Areas</span>
+      <h2>Proudly Serving Homes Across Hyderabad</h2>
+    </div>
+    <mat-chip-set class="areas__chips">
+      @for (area of serviceAreas; track area) {
+        <mat-chip disableRipple>{{ area }}</mat-chip>
+      }
+    </mat-chip-set>
+  </div>
+</section>
+
+<app-cta-band></app-cta-band>

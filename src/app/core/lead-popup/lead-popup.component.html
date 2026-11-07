@@ -1,0 +1,22 @@
+<div class="lead-popup">
+  <button type="button" class="lead-popup__close" (click)="dialogRef.close()" aria-label="Close">
+    <mat-icon>close</mat-icon>
+  </button>
+
+  <div class="lead-popup__media">
+    <img src="assets/images/living/tv-unit-01.webp" alt="" />
+    <div class="lead-popup__media-overlay">
+      <span class="eyebrow">{{ site.yearsExperience }}+ Years of Experience</span>
+      <h2>Designs For Every Budget</h2>
+      <p>Get your dream home today. Let our experts help you.</p>
+    </div>
+  </div>
+
+  <div class="lead-popup__form">
+    <h2 class="lead-popup__form-heading">Get a Free Consultation</h2>
+    <p class="lead-popup__form-sub">
+      Share your details and {{ site.founder }} will personally get back to you.
+    </p>
+    <app-lead-form (submitted)="onSubmitted()"></app-lead-form>
+  </div>
+</div>

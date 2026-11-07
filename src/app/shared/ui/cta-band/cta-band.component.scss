@@ -1,0 +1,53 @@
+.cta-band {
+  background: var(--charcoal);
+  padding: 48px 0;
+
+  @media (min-width: 960px) {
+    padding: 64px 0;
+  }
+}
+
+.cta-band__inner {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  align-items: center;
+  text-align: center;
+
+  @media (min-width: 860px) {
+    flex-direction: row;
+    justify-content: space-between;
+    text-align: left;
+  }
+}
+
+.cta-band h2 {
+  color: #faf8f3;
+  font-size: clamp(1.5rem, 2.6vw, 2rem);
+  margin-bottom: 8px;
+}
+
+.cta-band p {
+  color: #cfc7b8;
+  max-width: 460px;
+  margin: 0;
+}
+
+.cta-band__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  justify-content: center;
+
+  a, button {
+    border-radius: 28px !important;
+    padding: 0 22px !important;
+    height: 48px;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    white-space: nowrap;
+    cursor: pointer;
+    border: none;
+  }
+}

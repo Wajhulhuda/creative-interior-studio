@@ -1,0 +1,50 @@
+<header class="header">
+  <div class="header__inner page-container">
+    <a class="header__brand" routerLink="/" aria-label="Creative Interior Design Studio — Home">
+      <img src="assets/images/logo/logo-icon.webp" alt="" class="header__logo" />
+      <span class="header__brand-text">
+        <span class="header__brand-name">Creative Interior</span>
+        <span class="header__brand-sub">Design Studio</span>
+      </span>
+    </a>
+
+    <nav class="header__nav">
+      @for (link of navLinks; track link.path) {
+        <a
+          [routerLink]="link.path"
+          routerLinkActive="is-active"
+          [routerLinkActiveOptions]="{ exact: link.path === '/' }"
+          class="header__nav-link"
+        >
+          {{ link.label }}
+        </a>
+      }
+    </nav>
+
+    <div class="header__actions">
+      <a [href]="callHref" class="header__icon-btn" aria-label="Call Creative Interior Design Studio">
+        <mat-icon>call</mat-icon>
+      </a>
+      <a
+        [href]="whatsappHref"
+        target="_blank"
+        rel="noopener"
+        class="header__icon-btn header__whatsapp-icon"
+        aria-label="Chat with Creative Interior Design Studio on WhatsApp"
+      >
+        <mat-icon>chat</mat-icon>
+      </a>
+      <button type="button" class="header__cta" (click)="openLeadForm.emit()">
+        Free Quote
+      </button>
+      <button
+        type="button"
+        class="header__menu-btn"
+        aria-label="Open navigation menu"
+        (click)="menuToggle.emit()"
+      >
+        <mat-icon>menu</mat-icon>
+      </button>
+    </div>
+  </div>
+</header>

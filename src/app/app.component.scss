@@ -1,0 +1,92 @@
+.app-shell {
+  min-height: 100vh;
+  background: var(--cream);
+  // Compensates for .header now being position:fixed (removed from normal
+  // flow) — must match .header__inner's fixed height exactly.
+  padding-top: 76px;
+}
+
+.app-shell--drawer-open {
+  // mat-sidenav-container's own stacking context is capped at z-index:1 by
+  // Material's CSS, so its mobile drawer can never out-rank a sibling with a
+  // higher z-index (like the fixed header, z-index:100) no matter what
+  // z-index the drawer itself has — stacking is hierarchical, not global.
+  // Raise the whole container's context above the header, but only while the
+  // drawer is actually open, so normal scrolled content still stays beneath
+  // the header the rest of the time.
+  z-index: 110;
+}
+
+main {
+  display: block;
+  min-height: 60vh;
+}
+
+.mobile-nav {
+  width: min(320px, 85vw);
+  background: var(--charcoal) !important;
+  color: #f3efe6;
+  display: flex;
+  flex-direction: column;
+  padding: 20px 24px 28px;
+}
+
+.mobile-nav__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 24px;
+}
+
+.mobile-nav__logo {
+  height: 46px;
+  width: auto;
+}
+
+.mobile-nav__close {
+  background: none;
+  border: none;
+  color: #f3efe6;
+  cursor: pointer;
+  display: inline-flex;
+}
+
+.mobile-nav__list {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin-bottom: 32px;
+
+  a {
+    padding: 14px 10px;
+    font-size: 1.05rem;
+    font-weight: 500;
+    border-radius: 8px;
+    color: #e6e1d6;
+
+    &.is-active,
+    &:hover {
+      background: rgba(201, 162, 39, 0.14);
+      color: var(--gold-light);
+    }
+  }
+}
+
+.mobile-nav__cta {
+  margin-top: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+
+  a, button {
+    justify-content: center;
+    height: 46px;
+    border-radius: 24px !important;
+    width: 100%;
+  }
+}
+
+.mobile-nav__outline {
+  color: #f3efe6 !important;
+  border-color: rgba(255, 255, 255, 0.3) !important;
+}

@@ -1,0 +1,91 @@
+// Custom brand theming for Creative Interior Design Studio
+// Primary = gold (sampled from the logo), Accent = charcoal/black
+@use '@angular/material' as mat;
+
+@include mat.core();
+
+$gold-palette: (
+  50: #fbf6e9,
+  100: #f6e8c7,
+  200: #eedaa2,
+  300: #e3c878,
+  400: #d6b64e,
+  500: #c9a227,
+  600: #b6901f,
+  700: #9c7a18,
+  800: #826512,
+  900: #5e480a,
+  A100: #f6e4a8,
+  A200: #efd36e,
+  A400: #e0b030,
+  A700: #c49a1c,
+  contrast: (
+    50: #1a1816,
+    100: #1a1816,
+    200: #1a1816,
+    300: #1a1816,
+    400: #1a1816,
+    500: #1a1816,
+    600: #ffffff,
+    700: #ffffff,
+    800: #ffffff,
+    900: #ffffff,
+    A100: #1a1816,
+    A200: #1a1816,
+    A400: #1a1816,
+    A700: #ffffff,
+  )
+);
+
+$charcoal-palette: (
+  50: #ecebea,
+  100: #d1cdcb,
+  200: #b3adaa,
+  300: #948c88,
+  400: #7b726d,
+  500: #4a433f,
+  600: #3d3733,
+  700: #2f2a27,
+  800: #221e1c,
+  900: #1a1816,
+  A100: #8c8178,
+  A200: #6b625a,
+  A400: #453e3a,
+  A700: #2a2522,
+  contrast: (
+    50: #1a1816,
+    100: #1a1816,
+    200: #1a1816,
+    300: #1a1816,
+    400: #ffffff,
+    500: #ffffff,
+    600: #ffffff,
+    700: #ffffff,
+    800: #ffffff,
+    900: #ffffff,
+    A100: #1a1816,
+    A200: #ffffff,
+    A400: #ffffff,
+    A700: #ffffff,
+  )
+);
+
+$cid-primary: mat.define-palette($gold-palette);
+$cid-accent: mat.define-palette($charcoal-palette);
+$cid-warn: mat.define-palette(mat.$red-palette);
+
+$cid-typography: mat.define-typography-config(
+  $font-family: '"Poppins", "Helvetica Neue", Arial, sans-serif',
+);
+
+$cid-theme: mat.define-light-theme((
+  color: (
+    primary: $cid-primary,
+    accent: $cid-accent,
+    warn: $cid-warn,
+  ),
+  typography: $cid-typography,
+  density: 0
+));
+
+@include mat.all-component-themes($cid-theme);

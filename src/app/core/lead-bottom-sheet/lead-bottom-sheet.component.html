@@ -1,0 +1,14 @@
+<div class="lead-sheet">
+  <div class="lead-sheet__handle"></div>
+
+  <button type="button" class="lead-sheet__close" (click)="close()" aria-label="Close">
+    <mat-icon>close</mat-icon>
+  </button>
+
+  <h2 class="lead-sheet__heading">Get a Free Consultation</h2>
+  <p class="lead-sheet__sub">
+    Share your details and {{ site.founder }} will personally get back to you.
+  </p>
+
+  <app-lead-form (submitted)="onSubmitted()"></app-lead-form>
+</div>

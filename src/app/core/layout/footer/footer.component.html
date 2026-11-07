@@ -1,0 +1,68 @@
+<footer class="footer">
+  <div class="footer__trust">
+    <div class="page-container footer__trust-inner">
+      <span><mat-icon>military_tech</mat-icon>{{ site.yearsExperience }}+ Years Experience</span>
+      <span><mat-icon>groups</mat-icon>In-House Skilled Team</span>
+      <span><mat-icon>verified_user</mat-icon>Workmanship Warranty</span>
+      <span><mat-icon>design_services</mat-icon>Free Site Visit &amp; 3D Design</span>
+    </div>
+  </div>
+
+  <div class="page-container footer__grid">
+    <div class="footer__col footer__col--brand">
+      <img src="assets/images/logo/logo-full.webp" alt="Creative Interior Design Studio logo" class="footer__logo" />
+      <p>
+        {{ site.companyName }} designs and delivers complete home interiors across Hyderabad —
+        from the first site visit to the final finishing touch, backed by {{ site.yearsExperience }}+
+        years of hands-on experience.
+      </p>
+      <a class="footer__instagram" [href]="site.instagramUrl" target="_blank" rel="noopener">
+        <mat-icon>photo_camera</mat-icon>
+        {{ site.instagramHandle }}
+      </a>
+    </div>
+
+    <div class="footer__col">
+      <h4>Quick Links</h4>
+      <ul class="footer__links">
+        @for (link of navLinks; track link.path) {
+          <li><a [routerLink]="link.path">{{ link.label }}</a></li>
+        }
+      </ul>
+    </div>
+
+    <div class="footer__col">
+      <h4>Our Services</h4>
+      <ul class="footer__links">
+        @for (service of featuredServices; track service.name) {
+          <li><a routerLink="/services">{{ service.name }}</a></li>
+        }
+      </ul>
+    </div>
+
+    <div class="footer__col">
+      <h4>Get In Touch</h4>
+      <ul class="footer__contact">
+        <li>
+          <mat-icon>location_on</mat-icon>
+          <span>{{ site.address }}</span>
+        </li>
+        @for (phone of site.phones; track phone.raw) {
+          <li>
+            <mat-icon>call</mat-icon>
+            <a [href]="telLink(phone.raw)">{{ phone.display }}</a>
+          </li>
+        }
+        <li>
+          <mat-icon>chat</mat-icon>
+          <a [href]="whatsappLink(site.phones[0].raw)" target="_blank" rel="noopener">Chat on WhatsApp</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="footer__bottom page-container">
+    <span>&copy; {{ currentYear }} {{ site.companyName }}. All rights reserved.</span>
+    <span>Founded &amp; led by {{ site.founder }}</span>
+  </div>
+</footer>

@@ -1,0 +1,52 @@
+<app-page-header
+  eyebrow="Our Services"
+  title="Complete Interior & Turnkey Services"
+  subtitle="{{ site.yearsExperience }}+ years of hands-on execution across every trade your home needs — design, furniture, civil and MEP work, all under one roof."
+  [showCta]="true"
+  backgroundImage="assets/images/kitchen/modular-kitchen-04.webp"
+></app-page-header>
+
+@for (category of categories; track category.id; let i = $index) {
+  <section class="section services-category" [class.services-category--alt]="i % 2 === 1">
+    <div class="page-container">
+      <div class="section-heading services-category__heading" appReveal>
+        <span class="eyebrow">{{ category.title }}</span>
+        <h2>{{ category.title }}</h2>
+        <p>{{ category.description }}</p>
+      </div>
+
+      <div class="services-category__grid">
+        @for (item of category.items; track item.name; let j = $index) {
+          <button
+            type="button"
+            class="service-card"
+            appReveal
+            [appRevealDelay]="j * 50"
+            (click)="leadDialog.open()"
+          >
+            <div class="service-card__media">
+              <div class="service-card__media-crop">
+                <img [src]="item.image" [alt]="item.name" loading="lazy" />
+              </div>
+              <span class="service-card__icon">
+                <mat-icon>{{ item.icon }}</mat-icon>
+              </span>
+            </div>
+            <div class="service-card__body">
+              <h3>{{ item.name }}</h3>
+              <p>{{ item.description }}</p>
+              <span class="service-card__arrow">
+                <mat-icon>arrow_forward</mat-icon>
+              </span>
+            </div>
+          </button>
+        }
+      </div>
+    </div>
+  </section>
+}
+
+<app-cta-band
+  heading="Not sure where to start?"
+  subtext="Get a free site visit and 3D design consultation — no obligation, just honest advice."
+></app-cta-band>
